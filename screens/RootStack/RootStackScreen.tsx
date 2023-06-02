@@ -1,14 +1,13 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import BuddySearchScreen from "./ProjectAdd/ProjectAdd.main";
+import ProjectAdd from "./ProjectAdd/ProjectAdd.main";
 import {HomeStackScreen} from "./HomePageScreen/HomeStackScreen";
-import ListofBuddies from "./HomePageScreen/ListofBuddies";
 
 
 export type RootStackParamList = {
   HomeStackScreen: undefined;
-  BuddySearchScreen: undefined;
+  ProjectAdd: undefined;
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -19,12 +18,12 @@ export function RootStackScreen() {
     <NavigationContainer>
       <RootStack.Navigator
         screenOptions={{ presentation: "modal" }}
-        initialRouteName="BuddySearchScreen"
+        initialRouteName="ProjectAdd"
       >
         <RootStack.Screen
-          name="BuddySearchScreen"
+          name="ProjectAdd"
           options={options}
-          component={BuddySearchScreen}
+          component={ProjectAdd}
         />
         <RootStack.Screen
           name="HomeStackScreen"

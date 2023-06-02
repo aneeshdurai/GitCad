@@ -11,19 +11,7 @@ interface Props {
 }
 
 export default function SignUpScreen({ navigation }: Props) {
-  /* Screen Requirements:
-      - AppBar
-      - Email & Password Text Input
-      - Submit Button
-      - Sign In Button (goes to Sign In Screen)
-      - Snackbar for Error Messages
   
-    All UI components on this screen can be found in:
-      https://callstack.github.io/react-native-paper/
-
-    All authentication logic can be found at:
-      https://firebase.google.com/docs/auth/web/start
-  */
 
   const [name, setName] = useState("")
   const [username, setUserName] = useState("")

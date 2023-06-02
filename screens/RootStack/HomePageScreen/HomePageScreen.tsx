@@ -8,7 +8,6 @@ import { getAuth, signOut } from "firebase/auth";
 import { Ticket } from "../../../models/ticket";
 import { styles } from "./HomePage.styles";
 import { HomeStackParamList } from "./HomeStackScreen";
-import HomePageScreen from "./HomePageScreen";
 
 
 interface Props {
@@ -16,9 +15,7 @@ interface Props {
   }
 
 
-export default function ListofBuddies({navigation}: Props) {
-     
-    //const RootStack = createStackNavigator<RootStackParamList>();
+export default function HomePageScreen({navigation}: Props) {
 
     const [tickets, setTickets] = useState<Ticket[]>([]);
 
@@ -37,7 +34,6 @@ export default function ListofBuddies({navigation}: Props) {
               newTicket.id = ticket.id;
               newTickets.push(newTicket);
             });
-            //console.log(newTickets);
             setTickets(newTickets);
         });
         return unsubscribe;
@@ -78,57 +74,10 @@ export default function ListofBuddies({navigation}: Props) {
         await deleteDoc(doc(db, "tickets", ticket.id));
       }
     };
-    /*
-    const request = async (ticket: Ticket) => {
-      //console.log(myticket)
-      ticket.requests.push(myticket.uid)
-      if (ticket.id) {
-        await setDoc(doc(db, "tickets", ticket.id), ticket);
-      }
-      console.log(ticket)
-      //myticket.requests.push(ticket.uid)
-      //console.log(findATicket(ticket.uid))
     
-    }*/
 
     const renderTicket = ({ item }: { item: Ticket }) => {
-        /*
-        if (currentUserId != item.uid) {
-          if (myticket.course == item.course) {
-            return (
-
-              <Card style={{ margin: 16 }}>
-                <Card.Title
-                  title={item.name +
-                    " at " + item.location}
-                  subtitle={
-                    item.description
-                  }
-                />
-                <Card.Actions>
-                  <Button onPress={() => {request(item)}}>
-                    REQUEST
-                  </Button>
-                </Card.Actions>
-              </Card>
-            );
-          }
-        }
-        else {
-          return (
-            <Card style={{ margin: 16 }}>
-              <Card.Title
-                title={item.name +
-                  " at " + item.location}
-                subtitle={
-                  item.description
-                }
-              />
-            </Card>
-          )
-        }
-      };
-      */
+        
       return (
         <Card style={{ margin: 16 }}>
           <Card.Cover source={{ uri: item.image }} />
@@ -139,9 +88,7 @@ export default function ListofBuddies({navigation}: Props) {
             }
           />
           
-          {/* TODO: Add a like/interested button & delete soccial button. See Card.Actions
-                in React Native Paper for UI/UX inspiration.
-                https://callstack.github.io/react-native-paper/card-actions.html */
+          {
             <Card.Actions>  
               
               <Button onPress={() => {navigation.navigate("UpdateScreen", item.name)}}>
@@ -168,9 +115,7 @@ export default function ListofBuddies({navigation}: Props) {
               icon="exit-to-app"
               onPress={() => {
                 deleteTicket(myticket);
-                /*if (auth.currentUser?.uid != null) {
-                  signOut(auth);
-                }*/
+                
                 navigation.navigate('HomePageScreen')
                 
               }}
@@ -201,9 +146,6 @@ export default function ListofBuddies({navigation}: Props) {
                     data={tickets}
                     renderItem={renderTicket}
                     keyExtractor={(_: any, index: number) => "key-" + index}
-                    // TODO: Uncomment the following line, and figure out how it works
-                    // by reading the documentation :)
-                    // https://reactnative.dev/docs/flatlist#listemptycomponent
 
                     ListEmptyComponent={ListEmptyComponent}
                  />
